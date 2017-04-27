@@ -1,0 +1,10 @@
+<div id="sideNav">
+  <div id="navHeader">
+    {{title}}
+  </div>
+  <div class="flex-container flex-col">
+    <div *ngFor="let item of menuItems" routerLink="/{{item.toLowerCase()}}" class="flex-child nav-item">
+      {{item}}
+    </div>
+  </div>
+</div>

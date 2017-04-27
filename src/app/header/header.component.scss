@@ -1,0 +1,8 @@
+@import '~scss_common/colours.scss';
+@import '~scss_common/flex.scss';
+@import '~scss_common/mixins.scss';
+
+#headerContainer{
+    background-color: $mainTheme1_red_very_light;
+    height: 65px;
+}
