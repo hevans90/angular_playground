@@ -11,7 +11,7 @@ export class SidenavComponent implements OnInit {
   constructor() { }
   @Input() title : string;
 
-  public menuItems: Array<string> = ['Home', 'Dashboard', 'Twitch Streams'];
+  public menuItems: Array<string> = ['Home', 'Dashboard', 'FileDrop'];
 
   ngOnInit() {
   }

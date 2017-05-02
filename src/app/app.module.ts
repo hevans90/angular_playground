@@ -9,10 +9,13 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './views/home/home.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { FiledropComponent } from './views/filedrop/filedrop.component';
+import { FiledropDirective } from './views/filedrop/filedrop.directive';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'filedrop', component: FiledropComponent },
 ];
 
 @NgModule({
@@ -22,6 +25,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     HomeComponent,
     DashboardComponent,
+    FiledropComponent,
+    FiledropDirective,
   ],
   imports: [
     BrowserModule,
