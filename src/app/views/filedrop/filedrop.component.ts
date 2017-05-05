@@ -9,20 +9,22 @@ export class FiledropComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.allowedExtensions = this.allowedDocExtenstions.concat(this.allowedImageExtensions);
   }
 
   public currentFiles: Array<File> = [];
-  private thumbnails = [];
-  private debug_size_before = [];
-  private debug_size_after = [];
+  public thumbnails = [];
+  public debug_size_before = [];
+  public debug_size_after = [];
 
-  private dropzoneInvalid: boolean = false;
-  private allowedExtensions : Array<string>;
+  public dropzoneInvalid: boolean = false;
+  public allowedExtensions: Array<string>;
 
-  private allowedDocExtenstions = ['pdf'];
-  private allowedImageExtensions = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
+  private pdfLogo = require('./assets/pdf_logo.png');
+
+  public allowedDocExtenstions = ['pdf'];
+  public allowedImageExtensions = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
 
 
   onFilesChange(file: File) {
@@ -33,7 +35,15 @@ export class FiledropComponent implements OnInit {
 
     if (!this.dropzoneInvalid) {
       this.currentFiles.push(file);
-      this.readImages(file);
+
+      let ext = file.name.split('.')[file.name.split('.').length - 1];
+
+      if (this.allowedImageExtensions.filter(x => x === ext).length) {
+        this.buildThumbnail(file);
+      } else if (this.allowedDocExtenstions.filter(x => x === ext).length) {
+        this.parsePdf(file);
+      }
+
     }
   }
 
@@ -49,7 +59,8 @@ export class FiledropComponent implements OnInit {
     }, 1500);
   }
 
-  readImage(file, reader, callback) {
+
+  readFile(file, reader: FileReader, callback) {
     reader.onload = () => {
       callback(reader.result);
     }
@@ -57,9 +68,17 @@ export class FiledropComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  readImages(file) {
+  parsePdf(file: File) {
     let reader = new FileReader();
-    this.readImage(file, reader, (result) => {
+    this.readFile(file, reader, (result) => {
+
+      this.thumbnails.push(this.pdfLogo);
+    });
+  }
+
+  buildThumbnail(file) {
+    let reader = new FileReader();
+    this.readFile(file, reader, (result) => {
       var img = document.createElement("img");
       img.src = result;
 
